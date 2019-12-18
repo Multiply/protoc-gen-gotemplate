@@ -1,0 +1,59 @@
+# gazelle:exclude examples
+# gazelle:prefix moul.io/protoc-gen-gotemplate
+
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+package(default_visibility = ["//visibility:public"])
+
+exports_files([
+    "README.md",
+    "go.mod",
+    "go.sum",
+])
+
+filegroup(
+    name = "package-srcs",
+    srcs = glob(
+        ["**"],
+        exclude = [
+            "bazel-*/**",
+            ".git/**",
+        ],
+    ),
+    tags = ["automanaged"],
+    visibility = ["//visibility:private"],
+)
+
+filegroup(
+    name = "all-srcs",
+    srcs = [
+        ":package-srcs",
+        "//cmd/web-editor:all-srcs",
+        "//external:all-srcs",
+        "//helpers:all-srcs",
+    ],
+    tags = ["automanaged"],
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "encoder.go",
+        "main.go",
+    ],
+    importpath = "moul.io/protoc-gen-gotemplate",
+    deps = [
+        "//helpers:go_default_library",
+        "@com_github_golang_protobuf//proto:go_default_library",
+        "@com_github_golang_protobuf//protoc-gen-go/generator:go_default_library_gen",
+        "@com_github_grpc_ecosystem_grpc_gateway//protoc-gen-grpc-gateway/descriptor:go_default_library",
+        "@io_bazel_rules_go//proto/wkt:compiler_plugin_go_proto",
+        "@io_bazel_rules_go//proto/wkt:descriptor_go_proto",
+    ],
+)
+
+go_binary(
+    name = "protoc-gen-gotemplate",
+    embed = [":go_default_library"],
+)

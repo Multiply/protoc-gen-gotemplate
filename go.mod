@@ -1,5 +1,7 @@
 module moul.io/protoc-gen-gotemplate
 
+go 1.13
+
 require (
 	github.com/Masterminds/semver v1.2.2 // indirect
 	github.com/Masterminds/sprig v2.14.1+incompatible

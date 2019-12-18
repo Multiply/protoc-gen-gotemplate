@@ -1,0 +1,5 @@
+{
+	"AddSourcesRules": true,
+	"GoPrefix": "moul.io/protoc-gen-gotemplate",
+	"SkippedPaths": ["^examples/"]
+}

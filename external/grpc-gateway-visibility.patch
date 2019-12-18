@@ -1,0 +1,12 @@
+diff --git protoc-gen-grpc-gateway/descriptor/BUILD.bazel protoc-gen-grpc-gateway/descriptor/BUILD.bazel
+index cfbdc27..631f5c8 100644
+--- protoc-gen-grpc-gateway/descriptor/BUILD.bazel
++++ protoc-gen-grpc-gateway/descriptor/BUILD.bazel
+@@ -1,6 +1,6 @@
+ load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+ 
+-package(default_visibility = ["//:generators"])
++package(default_visibility = ["//visibility:public"])
+ 
+ go_library(
+     name = "go_default_library",
